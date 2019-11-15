@@ -35,12 +35,25 @@
 
     <!-- Side nav -->
     <ul id="side-menu" class="sidenav side-menu">
-      <li><a class="subheader">Foodini</a></li>
-      <li><a href="/" class="waves-effect">Home</a></li>
-      <li><a href="/pages/about.html" class="waves-effect">About</a></li>
+      <li>
+        <a href="/" class="brand"><span>Food</span>ini</a>
+      </li>
+      <li>
+        <a href="/" class="waves-effect">
+          <i class="material-icons">home</i>
+          Home</a
+        >
+      </li>
+      <li>
+        <a href="/pages/about.html" class="waves-effect">
+          <i class="material-icons">book</i>About</a
+        >
+      </li>
       <li><div class="divider"></div></li>
       <li>
-        <a href="/pages/contact.html" class="waves-effect"> Contact</a>
+        <a href="/pages/contact.html" class="waves-effect">
+          <i class="material-icons">email</i>Contact</a
+        >
       </li>
     </ul>
     <!-- / Side nav -->
@@ -104,28 +117,28 @@
     <!-- Add recipe side form -->
     <div id="side-form" class="sidenav side-form">
       <form class="add-recipe container section">
-        <h6>New Recipe</h6>
+        <h6>Add a new recipe</h6>
         <div class="divider"></div>
         <div class="input-field">
           <input
             placeholder="e.g. Ninja soup"
             id="title"
             type="text"
-            class="validate"
+            class="validate form-input"
           />
-          <label for="title">Recipe Title</label>
+          <label for="title">Recipe title</label>
         </div>
         <div class="input-field">
           <input
             placeholder="e.g. Tofu, mushroom, garlic"
             id="ingredients"
             type="text"
-            class="validate"
+            class="validate form-input"
           />
           <label for="ingredients">Ingredients</label>
         </div>
         <div class="input-field center">
-          <button class="btn-small">Add</button>
+          <button class="btn-small btn-form">Add</button>
         </div>
       </form>
     </div>

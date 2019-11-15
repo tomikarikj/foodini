@@ -46,6 +46,10 @@
   background-color: var(--dark-grey-1);
 }
 
+.btn-form {
+  background-color: var(--dark-grey-1);
+}
+
 .recipes {
   margin-top: 20px;
 }
@@ -88,4 +92,13 @@
 
 .recipe-ingredients {
   font-size: 0.8em;
+}
+
+.form-input:focus {
+  border-bottom: 1px solid var(--dark-grey-1) !important;
+  box-shadow: 0 1px 0 0 var(--dark-grey-1) !important;
+}
+
+input[type='text']:not(.browser-default):focus:not([readonly]) + label {
+  color: var(--dark-grey-1);
 }
