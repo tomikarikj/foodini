@@ -1,4 +1,5 @@
-const staticCacheName = 'site-static';
+const staticCacheName = 'foodini-static-v1';
+const dynamicCacheName = 'foodini-dynamic-v1';
 const staticAssets = [
   '/',
   '/index.html',
@@ -23,14 +24,31 @@ self.addEventListener('install', e => {
 
 // Service worker activation event
 self.addEventListener('activate', e => {
-  console.log('The service worker has been activated');
+  // Delete all of the old cached assets
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys
+          .filter(key => key !== staticCacheName)
+          .map(key => caches.delete(key))
+      );
+    })
+  );
 });
 
 // Service worker fetch event
 self.addEventListener('fetch', e => {
   e.respondWith(
     caches.match(e.request).then(cacheRes => {
-      return cacheRes || fetch(e.request);
+      return (
+        cacheRes ||
+        fetch(e.request).then(fetchRes => {
+          return caches.open(dynamicCacheName).then(cache => {
+            cache.put(e.request.url, fetchRes.clone());
+            return fetchRes;
+          });
+        })
+      );
     })
   );
 });
