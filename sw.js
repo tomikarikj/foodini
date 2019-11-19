@@ -14,6 +14,17 @@ const staticAssets = [
   'https://kit.fontawesome.com/63d74ff3d7.js'
 ];
 
+// Cache size limit
+const limitCacheSize = (name, size) => {
+  caches.open(name).then(cache => {
+    cache.keys().then(keys => {
+      if (keys.length > size) {
+        cache.delete(keys[0]).then(limitCacheSize(name, size));
+      }
+    });
+  });
+};
+
 // Service worker installation event
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -48,11 +59,16 @@ self.addEventListener('fetch', e => {
           fetch(e.request).then(fetchRes => {
             return caches.open(dynamicCacheName).then(cache => {
               cache.put(e.request.url, fetchRes.clone());
+              limitCacheSize(dynamicCacheName, 15);
               return fetchRes;
             });
           })
         );
       })
-      .catch(() => caches.match('/pages/fallback.html'))
+      .catch(() => {
+        if (e.request.url.includes('.html')) {
+          return caches.match('/pages/fallback.html');
+        }
+      })
   );
 });
